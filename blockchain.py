@@ -1,5 +1,5 @@
-import functools
-import hashlib
+from functools import reduce
+import hashlib as hl
 import json
 # The reward we give to miners (for creating a new block)
 MINING_REWARD = 10
@@ -26,7 +26,7 @@ def hash_block(block):
     Arguments:
         :block: The block that should be hashed.
     """
-    return hashlib.sha256(json.dumps(block).encode()).hexdigest()
+    return hl.sha256(json.dumps(block).encode()).hexdigest()
 
 
 def get_balance(participant):
