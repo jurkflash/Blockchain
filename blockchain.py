@@ -15,7 +15,15 @@ MINING_REWARD = 10
 
 
 class Blockchain:
+    """The Blockchain class manages the chain of blocks as well as open transactions and the node on which it's running.
+    
+    Attributes:
+        :chain: The list of blocks
+        :open_transactions (private): The list of open transactions
+        :hosting_node: The connected node (which runs the blockchain).
+    """
     def __init__(self, hosting_node_id):
+        """The constructor of the Blockchain class."""
         # Our starting block for the blockchain
         genesis_block = Block(0, '', [], 100, 0)
         # Initializing our (empty) blockchain list
@@ -25,16 +33,19 @@ class Blockchain:
         self.load_data()
         self.hosting_node = hosting_node_id
 
+    # This turns the chain attribute into a property with a getter (the method below) and a setter (@chain.setter)
     @property
     def chain(self):
         return self.__chain[:]
 
+    # The setter for the chain property
     @chain.setter 
     def chain(self, val):
         self.__chain = val
 
 
     def get_open_transactions(self):
+        """Returns a copy of the open transactions list."""
         return self.__open_transactions[:]
 
     def load_data(self):
